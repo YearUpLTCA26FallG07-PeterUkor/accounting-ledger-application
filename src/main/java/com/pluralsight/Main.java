@@ -1,7 +1,5 @@
 package com.pluralsight;
 
-import java.util.Scanner;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -10,7 +8,7 @@ public class Main {
         boolean inLoop = true;
         do{
             // display home screen and handle user input
-            char choice = MenuConsole.homeScreenMenuDisplay();
+            char choice = MenuConsole.displayHomeScreen();
 
             // pass matches for now
             switch (choice){
@@ -37,13 +35,13 @@ public class Main {
         do {
 
             // display ledger menu and handle user input
-            char choice = MenuConsole.ledgerMenuDisplay();
+            char choice = MenuConsole.displayLedgerMenu();
 
             switch (choice){
                 case 'A' -> System.out.println("Display all Entries " + choice);
                 case 'D' -> System.out.println("Display Deposits " + choice);
                 case 'P' -> System.out.println("Display Payments " + choice);
-                case 'R' -> System.out.println("Reports Screen " + choice);
+                case 'R' -> Ledger.reports();
                 case 'H' -> {
                     inLoop = false;
                     System.out.println("Returning to Home Screen...");

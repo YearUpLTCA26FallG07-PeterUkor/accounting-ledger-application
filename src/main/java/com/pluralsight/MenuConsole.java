@@ -7,7 +7,7 @@ public class MenuConsole {
     static Scanner input = new Scanner(System.in);
 
     // home screen menu display
-    public static char homeScreenMenuDisplay() {
+    public static char displayHomeScreen() {
         System.out.println("""
                     \n=== HOME SCREEN ===
                     D) Add Deposit - Enter Deposit Information
@@ -19,13 +19,25 @@ public class MenuConsole {
     }
 
     // ledger screen menu display
-    public static char ledgerMenuDisplay() {
+    public static char displayLedgerMenu() {
         System.out.println("""
                 A) All - Display All Entries
                 D) Deposits - Display Only Deposits
                 P) Payments - Display Only Payments
                 R) Reports - Run Pre-Defined Reports
                 H) Home - Go Back To Home Page
+                """);
+        return handleUserInput();
+    }
+
+    public static char displayReportsMenu() {
+        System.out.println("""
+                1) Month To Date
+                2) Previous Month
+                3) Year To Date
+                4) Previous Year
+                5) Search by Vendor
+                0) Back - Go Back To The Ledger Page
                 """);
         return handleUserInput();
     }
