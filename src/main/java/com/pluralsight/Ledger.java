@@ -5,7 +5,7 @@ public class Ledger {
         boolean inLoop = true;
 
         do {
-            char choice = MenuConsole.displayReportsMenu();
+            char choice = Prompt.displayReportsMenu();
 
             switch (choice) {
                 case '1' -> System.out.println("Month To Date " + choice);
