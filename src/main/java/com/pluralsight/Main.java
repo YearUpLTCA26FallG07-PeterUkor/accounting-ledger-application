@@ -1,18 +1,23 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) {
+
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
         boolean inLoop = true;
         do{
             // display home screen and handle user input
-            char choice = MenuConsole.displayHomeScreen();
+            char choice = Prompt.displayHomeScreen();
 
             // pass matches for now
             switch (choice){
-                case 'D' -> System.out.println("Add Deposit " + choice);
+                case 'D' -> addDeposit(transactions);
                 case 'P' -> System.out.println("Make Payment(Debit) " + choice);
                 case 'L' -> ledger();
                 case 'X' -> {
@@ -35,7 +40,7 @@ public class Main {
         do {
 
             // display ledger menu and handle user input
-            char choice = MenuConsole.displayLedgerMenu();
+            char choice = Prompt.displayLedgerMenu();
 
             switch (choice){
                 case 'A' -> System.out.println("Display all Entries " + choice);
@@ -54,4 +59,37 @@ public class Main {
 
         } while (inLoop);
     }
+
+    public static void addDeposit(ArrayList<Transaction> transactions) {
+        String transactionDate;
+        String transactionTime;
+        String transactionDescription;
+        String transactionVendor;
+        double transactionAmount;
+        String transactionType;
+
+        do {
+            String transactionString = Prompt.transactionPrompt("Deposit");
+            String[] transactionArray = transactionString.split("\\|");
+
+            if (transactionArray.length != 6){
+                System.out.println("!!! Invalid Transaction Entry !!!");
+                continue;
+            }
+
+            transactionDate = transactionArray[0];
+            transactionTime = transactionArray[1];
+            transactionDescription = transactionArray[2];
+            transactionVendor = transactionArray[3];
+            transactionAmount = Double.parseDouble(transactionArray[4]);
+            transactionType = transactionArray[5];
+
+            Transaction transaction = new Transaction(transactionDate, transactionTime,
+                    transactionDescription, transactionVendor, transactionAmount, transactionType);
+
+            transactions.add(transaction);
+
+        } while (Prompt.addAnotherTransaction());
+    }
+
 }

@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Transaction {
-    private LocalDate date;
-    private LocalTime time;
+    private String date;
+    private String time;
     private  String description;
     private String vendor;
     private double amount;
     private String transactionType;
 
-    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount, String transactionType) {
+    public Transaction(String date, String time, String description, String vendor, double amount, String transactionType) {
         this.date = date;
         this.time = time;
         this.description = description;
@@ -20,19 +20,19 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
