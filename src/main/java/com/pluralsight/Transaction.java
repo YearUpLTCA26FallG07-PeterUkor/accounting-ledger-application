@@ -2,16 +2,20 @@ package com.pluralsight;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
     private  String description;
     private String vendor;
     private double amount;
     private String transactionType;
 
-    public Transaction(String date, String time, String description, String vendor, double amount, String transactionType) {
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount, String transactionType) {
         this.date = date;
         this.time = time;
         this.description = description;
@@ -20,19 +24,19 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -71,10 +75,15 @@ public class Transaction {
     @Override
     public String toString() {
         return "\nTransaction Type: " + transactionType + "\n" +
-                "Date: " + date + "\n" +
-                "Time: " + time + "\n" +
+                "Date: " + date.format(dateFormatter) + "\n" +
+                "Time: " + time.format(timeFormatter) + "\n" +
                 "Description: " + description + "\n" +
                 "Vendor: " + vendor + "\n" +
-                "Amount: " + amount + "\n";
+                "Amount: " + String.format("%.2f", amount) + "\n";
+    }
+
+    public String toFileString() {
+        return date.format(dateFormatter) + "|" + time.format(timeFormatter) + "|" + description + "|" +
+                vendor + "|" + String.format("%.2f", amount) + "|" + transactionType;
     }
 }
