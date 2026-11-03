@@ -18,16 +18,15 @@ public class TransactionsFileHandler {
             int lineNumber = 0;
             String line;
 
-            // skip header line
-            bufferedReader.readLine();
-
             while ((line = bufferedReader.readLine()) != null) {
+                // increment line number
+                lineNumber++;
 
-                // skip empty lines
-                if (line.isBlank()){
+                // skip file header empty lines
+                if (line.toLowerCase().startsWith("date|") || line.isBlank()) {
                     continue;
                 }
-                lineNumber++;
+
 
                 // split and check transaction parts
                 String[] transactionParts = line.split("\\|");
