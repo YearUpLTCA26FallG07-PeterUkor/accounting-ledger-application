@@ -1,7 +1,6 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Ledger {
 
@@ -49,16 +48,22 @@ public class Ledger {
 
     public static void displayTransactionsByType(ArrayList<Transaction> transactions, String transactionType) {
 
-        // new array to hold similar transactions
-        ArrayList<Transaction> transactionTypeArray = new ArrayList<Transaction>();
+        // bool to handle no match found
+        boolean found = false;
 
+        // display transactionType matches
         for (Transaction transaction : transactions) {
             if (transaction.getTransactionType().equalsIgnoreCase(transactionType)) {
-                transactionTypeArray.add(transaction);
+                found = true;
+                System.out.println(transaction);
             }
         }
 
-        displayTransactions(transactionTypeArray);
+        // display a message if no type is found
+        if (!found) {
+            System.out.println("\nNo transactions found");
+        }
+
     }
 
     // sum all transaction amounts
