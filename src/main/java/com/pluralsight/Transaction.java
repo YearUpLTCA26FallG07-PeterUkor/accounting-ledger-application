@@ -84,6 +84,6 @@ public class Transaction {
 
     public String toFileString() {
         return date.format(dateFormatter) + "|" + time.format(timeFormatter) + "|" + description + "|" +
-                vendor + "|" + String.format("%.2f", amount) + "|" + transactionType;
+                vendor + "|" + String.format("%.2f", amount);
     }
 }
