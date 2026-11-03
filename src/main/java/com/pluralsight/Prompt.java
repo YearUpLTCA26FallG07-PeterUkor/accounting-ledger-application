@@ -11,9 +11,10 @@ public class Prompt {
     static Scanner input = new Scanner(System.in);
 
     // home screen menu display
-    public static char displayHomeScreen() {
+    public static char displayHomeScreen(double balance) {
+        printBalance(balance);
         System.out.println("""
-                    \n=== HOME SCREEN ===
+                    === HOME SCREEN ===
                     D) Add Deposit - Enter Deposit Information
                     P) Make Payment(Debit) - Enter Debit Information
                     L) Ledger - Display Ledger Screen
@@ -23,8 +24,10 @@ public class Prompt {
     }
 
     // ledger screen menu display
-    public static char displayLedgerMenu() {
+    public static char displayLedgerMenu(double balance) {
+        printBalance(balance);
         System.out.println("""
+                === LEDGER ===
                 A) All - Display All Entries
                 D) Deposits - Display Only Deposits
                 P) Payments - Display Only Payments
@@ -35,8 +38,10 @@ public class Prompt {
     }
 
     // reports screen menu display
-    public static char displayReportsMenu() {
+    public static char displayReportsMenu(double balance) {
+        printBalance(balance);
         System.out.println("""
+                === REPORTS ===
                 1) Month To Date
                 2) Previous Month
                 3) Year To Date
@@ -45,6 +50,10 @@ public class Prompt {
                 0) Back - Go Back To The Ledger Page
                 """);
         return handleUserInput();
+    }
+
+    public static void printBalance(double balance) {
+        System.out.printf("%n===== TOTAL BALANCE: %.2f =====%n", balance);
     }
 
     // handle user input for Menus
