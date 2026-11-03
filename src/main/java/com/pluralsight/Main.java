@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Main {
 
@@ -11,6 +12,12 @@ public class Main {
 
         // load transactions from file to arrayList
         TransactionsFileHandler.loadFile(transactions, fileName);
+
+        // sort the list
+        transactions.sort(Comparator
+                .comparing(Transaction::getDate)
+                .thenComparing(Transaction::getTime)
+                .reversed());
 
         boolean inLoop = true;
         do{
@@ -58,7 +65,8 @@ public class Main {
 
             // save transaction to file, then add object to the list
             if (TransactionsFileHandler.writeTransaction(transaction, filename)) {
-                transactions.add(transaction);
+                // add the object to the top of the list to stay sorted
+                transactions.add(0, transaction);
             }
 
             // prompt for add another transaction

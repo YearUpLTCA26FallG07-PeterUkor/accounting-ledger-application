@@ -29,10 +29,6 @@ public class Ledger {
 
     public static void displayTransactions(ArrayList<Transaction> transactions) {
 
-        // sort transactions to show the newest first
-        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime)
-                .reversed());
-
         if (transactions.isEmpty()) {
             System.out.println("\nNo transactions found");
             return;
