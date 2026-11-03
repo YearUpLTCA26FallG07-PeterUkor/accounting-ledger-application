@@ -1,6 +1,8 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -32,6 +34,7 @@ public class Prompt {
         return handleUserInput();
     }
 
+    // reports screen menu display
     public static char displayReportsMenu() {
         System.out.println("""
                 1) Month To Date
@@ -44,12 +47,12 @@ public class Prompt {
         return handleUserInput();
     }
 
-    // handle user input
+    // handle user input for Menus
     public static char handleUserInput() {
         // prompt for input
         System.out.print("Your input: ");
 
-        // use scanner from Main Class to accept input
+        // use scanner to accept input
         String userInput = input.nextLine().trim();
         char choice = '-';
 
@@ -62,8 +65,9 @@ public class Prompt {
         return choice;
     }
 
-    public static String transactionPrompt(String transactionType){
-        String formattedDateTime;
+    // prompt for transaction information and create transaction object
+    public static Transaction transactionPrompt(String transactionType){
+
         String transactionDescription;
         String transactionVendor;
         double transactionAmount;
@@ -78,8 +82,9 @@ public class Prompt {
 
         // handle invalid input for amount
         do {
+            // accept input as string and handle string to double conversion
             try {
-                System.out.println("Amount: ");
+                System.out.print("Amount: ");
                 String transactionAmountString = input.nextLine();
                 transactionAmount = Double.parseDouble(transactionAmountString);
 
@@ -88,29 +93,37 @@ public class Prompt {
                 continue;
             }
 
-            // check for transaction type against amount
-            if (transactionType.equalsIgnoreCase("Deposit") && (transactionAmount <= 0)){
-                System.out.println("\n!!! Deposit Can Not Be Zero or Negative !!!");
-                continue;
-            } else if (transactionType.equalsIgnoreCase("Payment") && (transactionAmount >= 0)) {
-                System.out.println("\n!!! Payments Can Not Be Zero or Positive !!!");
+            // check if amount is Not A Number or is infinity
+            if (Double.isNaN(transactionAmount) || Double.isInfinite(transactionAmount)) {
+                System.out.println("\n!!! Invalid Entry, Try Again. !!!\n");
                 continue;
             }
 
+            // check for transaction type against amount
+            // credits cannot be negative and debits cannot be positive
+            if (transactionType.equalsIgnoreCase("Credit") && (transactionAmount <= 0)){
+                System.out.println("\n!!! Deposit Can Not Be Zero or Negative !!!");
+                continue;
+            } else if (transactionType.equalsIgnoreCase("Debit") && (transactionAmount >= 0)) {
+                System.out.println("\n!!! Payments Can Not Be Zero or Positive !!!");
+                continue;
+            }
 
             break;
 
         } while (true);
 
-        // create date time string
+        // get date and time, and split in to date and time
         LocalDateTime localDateTime = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
-        formattedDateTime = localDateTime.format(dateTimeFormatter);
+        LocalDate localDate = localDateTime.toLocalDate();
+        LocalTime localTime = localDateTime.toLocalTime().withNano(0);
 
-        return HelperFunctions.stringBuilderHelper(formattedDateTime, transactionDescription,
+        // create transaction object and return
+        return new Transaction(localDate, localTime, transactionDescription,
                 transactionVendor, transactionAmount, transactionType);
     }
 
+    // prompt user whether they want to enter another transaction
     public static boolean addAnotherTransaction(){
         System.out.print("Add A New transaction (y/n): ");
         String userInput = input.nextLine().trim();
