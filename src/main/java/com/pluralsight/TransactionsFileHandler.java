@@ -17,6 +17,10 @@ public class TransactionsFileHandler {
             // read from file
             int lineNumber = 0;
             String line;
+
+            // skip header line
+            bufferedReader.readLine();
+
             while ((line = bufferedReader.readLine()) != null) {
 
                 // skip empty lines

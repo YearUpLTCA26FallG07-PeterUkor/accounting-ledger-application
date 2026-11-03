@@ -12,7 +12,7 @@ public class Prompt {
 
     // home screen menu display
     public static char displayHomeScreen(double balance) {
-        printBalance(balance);
+        displayBalance(balance);
         System.out.println("""
                     === HOME SCREEN ===
                     D) Add Deposit - Enter Deposit Information
@@ -25,7 +25,7 @@ public class Prompt {
 
     // ledger screen menu display
     public static char displayLedgerMenu(double balance) {
-        printBalance(balance);
+        displayBalance(balance);
         System.out.println("""
                 === LEDGER ===
                 A) All - Display All Entries
@@ -39,7 +39,7 @@ public class Prompt {
 
     // reports screen menu display
     public static char displayReportsMenu(double balance) {
-        printBalance(balance);
+        displayBalance(balance);
         System.out.println("""
                 === REPORTS ===
                 1) Month To Date
@@ -52,8 +52,8 @@ public class Prompt {
         return handleUserInput();
     }
 
-    public static void printBalance(double balance) {
-        System.out.printf("%n===== TOTAL BALANCE: %.2f =====%n", balance);
+    public static void displayBalance(double balance) {
+        System.out.printf("%n=== TOTAL BALANCE: %.2f ===%n", balance);
     }
 
     // handle user input for Menus
