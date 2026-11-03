@@ -18,7 +18,7 @@ public class Main {
             // pass matches for now
             switch (choice){
                 case 'D' -> addDeposit(transactions);
-                case 'P' -> System.out.println("Make Payment(Debit) " + choice);
+                case 'P' -> makePayment(transactions);
                 case 'L' -> ledger();
                 case 'X' -> {
                     inLoop = false;
@@ -34,6 +34,7 @@ public class Main {
         } while (inLoop);
     }
 
+    // ledger method
     public static void ledger(){
 
         boolean inLoop = true;
@@ -60,35 +61,30 @@ public class Main {
         } while (inLoop);
     }
 
+    // handle deposits
     public static void addDeposit(ArrayList<Transaction> transactions) {
-        String transactionDate;
-        String transactionTime;
-        String transactionDescription;
-        String transactionVendor;
-        double transactionAmount;
-        String transactionType;
+        String transactionType = "Credit";
+        handleTransaction(transactions, transactionType);
+    }
+
+    // handle payments
+    public static void makePayment(ArrayList<Transaction> transactions) {
+        String transactionType = "Debit";
+        handleTransaction(transactions, transactionType);
+    }
+
+    // handle transactions
+    public static void handleTransaction(ArrayList<Transaction> transactions, String transactionType) {
 
         do {
-            String transactionString = Prompt.transactionPrompt("Deposit");
-            String[] transactionArray = transactionString.split("\\|");
 
-            if (transactionArray.length != 6){
-                System.out.println("!!! Invalid Transaction Entry !!!");
-                continue;
-            }
+            // prompt user for input and create transaction Object
+            Transaction transaction = Prompt.transactionPrompt(transactionType);
 
-            transactionDate = transactionArray[0];
-            transactionTime = transactionArray[1];
-            transactionDescription = transactionArray[2];
-            transactionVendor = transactionArray[3];
-            transactionAmount = Double.parseDouble(transactionArray[4]);
-            transactionType = transactionArray[5];
-
-            Transaction transaction = new Transaction(transactionDate, transactionTime,
-                    transactionDescription, transactionVendor, transactionAmount, transactionType);
-
+            // add object to the list
             transactions.add(transaction);
 
+            // prompt for add another transaction
         } while (Prompt.addAnotherTransaction());
     }
 
