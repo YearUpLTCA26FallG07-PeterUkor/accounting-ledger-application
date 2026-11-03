@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 public class Reports {
@@ -27,7 +29,27 @@ public class Reports {
         } while (inLoop);
     }
 
-    public static void monthToDate(ArrayList<Transaction> transactions) { }
+    public static void monthToDate(ArrayList<Transaction> transactions) {
+        // build YearMonth object
+        YearMonth yearMonth = YearMonth.now();
+        boolean found = false;
+
+        // compare YearMonth object
+        for (Transaction transaction : transactions) {
+            LocalDate localDate = transaction.getDate();
+            YearMonth localYearMonth = YearMonth.from(localDate);
+
+            if (localYearMonth.equals(yearMonth)) {
+                found = true;
+                System.out.println(transaction);
+            }
+        }
+
+        if (!found) {
+            System.out.println("\nNo transactions found");
+        }
+    }
+
     public static void previousMonth(ArrayList<Transaction> transactions) { }
     public static void yearToDate(ArrayList<Transaction> transactions) { }
     public static void previousYear(ArrayList<Transaction> transactions) { }
