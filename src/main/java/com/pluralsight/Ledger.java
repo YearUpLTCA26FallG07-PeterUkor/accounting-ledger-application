@@ -1,27 +1,41 @@
 package com.pluralsight;
 
-public class Ledger {
-    public static void reports(){
-        boolean inLoop = true;
+import java.util.ArrayList;
 
+public class Ledger {
+
+    // ledger screen loop
+    public static void ledgerScreen(ArrayList<Transaction> transactions) {
+        boolean inLoop = true;
         do {
-            char choice = Prompt.displayReportsMenu();
+            char choice = Prompt.displayLedgerMenu(getBalance(transactions));
 
             switch (choice) {
-                case '1' -> System.out.println("Month To Date " + choice);
-                case '2' -> System.out.println("Previous Month " + choice);
-                case '3' -> System.out.println("Year To Date " + choice);
-                case '4' -> System.out.println("Previous Year " + choice);
-                case '5' -> System.out.println("Search by Vendor " + choice);
-                case '0' -> {
+                case 'A' -> displayAll(transactions);
+                case 'D' -> displayDeposits(transactions);
+                case 'P' -> displayPayments(transactions);
+                case 'R' -> Reports.reportsScreen(transactions);
+                case 'H' -> {
                     inLoop = false;
-                    System.out.println("Returning to Ledger Screen...");
+                    System.out.println("Returning to Home Screen...");
                 }
-
                 default -> System.out.println("\nInvalid Input" +
-                        "\nValid Inputs Include: 1, 2, 3, 4, 5, or 0" +
+                        "\nValid Inputs Include: A, D, P, R, or H" +
                         "\nPlease Enter a Valid Input");
             }
         } while (inLoop);
+    }
+
+    public static void displayAll(ArrayList<Transaction> transactions) { }
+    public static void displayDeposits(ArrayList<Transaction> transactions) { }
+    public static void displayPayments(ArrayList<Transaction> transactions) { }
+
+    // sum all transaction amounts
+    public static double getBalance(ArrayList<Transaction> transactions) {
+        double balance = 0;
+        for (Transaction transaction : transactions) {
+            balance += transaction.getAmount();
+        }
+        return balance;
     }
 }

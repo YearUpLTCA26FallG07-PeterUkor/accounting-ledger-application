@@ -5,22 +5,23 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
         // create array and load transactions from file to array
         String fileName = "transactions.csv";
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
+        // load transactions from file to arrayList
         TransactionsFileHandler.loadFile(transactions, fileName);
 
         boolean inLoop = true;
         do{
             // display home screen and handle user input
-            char choice = Prompt.displayHomeScreen();
+            char choice = Prompt.displayHomeScreen(Ledger.getBalance(transactions));
 
             // handle matches
             switch (choice){
                 case 'D' -> addDeposit(transactions, fileName);
                 case 'P' -> makePayment(transactions, fileName);
-                case 'L' -> ledger();
+                case 'L' -> Ledger.ledgerScreen(transactions);
                 case 'X' -> {
                     inLoop = false;
                     System.out.println("Thank you.");
@@ -32,33 +33,6 @@ public class Main {
                         "\nValid Inputs Include: D, P, L, or X" +
                         "\nPlease Enter a Valid Input");
             }
-        } while (inLoop);
-    }
-
-    // ledger method
-    public static void ledger(){
-
-        boolean inLoop = true;
-        do {
-
-            // display ledger menu and handle user input
-            char choice = Prompt.displayLedgerMenu();
-
-            switch (choice){
-                case 'A' -> System.out.println("Display all Entries " + choice);
-                case 'D' -> System.out.println("Display Deposits " + choice);
-                case 'P' -> System.out.println("Display Payments " + choice);
-                case 'R' -> Ledger.reports();
-                case 'H' -> {
-                    inLoop = false;
-                    System.out.println("Returning to Home Screen...");
-                }
-
-                default -> System.out.println("\nInvalid Input" +
-                        "\nValid Inputs Include: A, D, P, R, or H" +
-                        "\nPlease Enter a Valid Input");
-            }
-
         } while (inLoop);
     }
 
