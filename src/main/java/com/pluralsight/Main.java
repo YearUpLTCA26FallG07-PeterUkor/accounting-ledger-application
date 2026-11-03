@@ -8,7 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // create array and load transactions from file to array
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        TransactionsFileHandler.loadFile(transactions, "transactions.csv");
 
         boolean inLoop = true;
         do{
