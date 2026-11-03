@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Ledger {
 
@@ -11,7 +12,7 @@ public class Ledger {
             char choice = Prompt.displayLedgerMenu(getBalance(transactions));
 
             switch (choice) {
-                case 'A' -> displayAll(transactions);
+                case 'A' -> displayTransactions(transactions);
                 case 'D' -> displayDeposits(transactions);
                 case 'P' -> displayPayments(transactions);
                 case 'R' -> Reports.reportsScreen(transactions);
@@ -26,9 +27,43 @@ public class Ledger {
         } while (inLoop);
     }
 
-    public static void displayAll(ArrayList<Transaction> transactions) { }
-    public static void displayDeposits(ArrayList<Transaction> transactions) { }
-    public static void displayPayments(ArrayList<Transaction> transactions) { }
+    public static void displayTransactions(ArrayList<Transaction> transactions) {
+
+        // sort transactions to show the newest first
+        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime)
+                .reversed());
+
+        if (transactions.isEmpty()) {
+            System.out.println("\nNo transactions found");
+            return;
+        }
+
+        for (Transaction transaction : transactions) {
+            System.out.print(transaction.toString());
+        }
+    }
+
+    public static void displayDeposits(ArrayList<Transaction> transactions) {
+        displayTransactionsByType(transactions, "Credit");
+    }
+
+    public static void displayPayments(ArrayList<Transaction> transactions) {
+        displayTransactionsByType(transactions, "Debit");
+    }
+
+    public static void displayTransactionsByType(ArrayList<Transaction> transactions, String transactionType) {
+
+        // new array to hold similar transactions
+        ArrayList<Transaction> transactionTypeArray = new ArrayList<Transaction>();
+
+        for (Transaction transaction : transactions) {
+            if (transaction.getTransactionType().equalsIgnoreCase(transactionType)) {
+                transactionTypeArray.add(transaction);
+            }
+        }
+
+        displayTransactions(transactionTypeArray);
+    }
 
     // sum all transaction amounts
     public static double getBalance(ArrayList<Transaction> transactions) {
