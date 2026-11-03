@@ -3,7 +3,7 @@ package com.pluralsight;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Month;
 import java.util.Scanner;
 
 public class Prompt {
@@ -83,11 +83,9 @@ public class Prompt {
 
         System.out.println("\n--- Enter The Following Information ---");
 
-        System.out.print("Transaction Description: ");
-        transactionDescription = input.nextLine();
-
-        System.out.print("Vendor: ");
-        transactionVendor = input.nextLine();
+        // prompt for description and vendor
+        transactionDescription = textPrompt("Transaction Description");
+        transactionVendor = textPrompt("Transaction Vendor");
 
         // handle invalid input for amount
         do {
@@ -130,6 +128,19 @@ public class Prompt {
         // create transaction object and return
         return new Transaction(localDate, localTime, transactionDescription,
                 transactionVendor, transactionAmount, transactionType);
+    }
+
+    // prompt for text that is not empty and has no "|"
+    public static String textPrompt(String label) {
+        do {
+            System.out.print(label + ": ");
+            String userInput = input.nextLine().trim();
+
+            if (!userInput.isEmpty() && !userInput.contains("|")) {
+                return userInput;
+            }
+            System.out.println("\n!!! " + label + " cannot be empty or contain \"|\" !!!\n");
+        } while (true);
     }
 
     // prompt user whether they want to enter another transaction
