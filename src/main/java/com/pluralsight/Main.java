@@ -2,25 +2,24 @@ package com.pluralsight;
 
 import java.util.ArrayList;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
     public static void main(String[] args) {
 
         // create array and load transactions from file to array
+        String fileName = "transactions.csv";
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-        TransactionsFileHandler.loadFile(transactions, "transactions.csv");
+        TransactionsFileHandler.loadFile(transactions, fileName);
 
         boolean inLoop = true;
         do{
             // display home screen and handle user input
             char choice = Prompt.displayHomeScreen();
 
-            // pass matches for now
+            // handle matches
             switch (choice){
-                case 'D' -> addDeposit(transactions);
-                case 'P' -> makePayment(transactions);
+                case 'D' -> addDeposit(transactions, fileName);
+                case 'P' -> makePayment(transactions, fileName);
                 case 'L' -> ledger();
                 case 'X' -> {
                     inLoop = false;
@@ -64,27 +63,29 @@ public class Main {
     }
 
     // handle deposits
-    public static void addDeposit(ArrayList<Transaction> transactions) {
+    public static void addDeposit(ArrayList<Transaction> transactions, String filename) {
         String transactionType = "Credit";
-        handleTransaction(transactions, transactionType);
+        handleTransaction(transactions, transactionType, filename);
     }
 
     // handle payments
-    public static void makePayment(ArrayList<Transaction> transactions) {
+    public static void makePayment(ArrayList<Transaction> transactions, String filename) {
         String transactionType = "Debit";
-        handleTransaction(transactions, transactionType);
+        handleTransaction(transactions, transactionType, filename);
     }
 
     // handle transactions
-    public static void handleTransaction(ArrayList<Transaction> transactions, String transactionType) {
+    public static void handleTransaction(ArrayList<Transaction> transactions, String transactionType, String filename) {
 
         do {
 
             // prompt user for input and create transaction Object
             Transaction transaction = Prompt.transactionPrompt(transactionType);
 
-            // add object to the list
-            transactions.add(transaction);
+            // save transaction to file, then add object to the list
+            if (TransactionsFileHandler.writeTransaction(transaction, filename)) {
+                transactions.add(transaction);
+            }
 
             // prompt for add another transaction
         } while (Prompt.addAnotherTransaction());

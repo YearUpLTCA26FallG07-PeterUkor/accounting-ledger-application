@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,15 +10,19 @@ import java.util.Arrays;
 public class TransactionsFileHandler {
 
     public static void loadFile(ArrayList<Transaction> transactions, String fileName) {
-        try {
-            // create file reader and buffer reader
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        // create file reader and buffer reader and prepare file for reading
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
 
             // read from file
             int lineNumber = 0;
             String line;
             while ((line = bufferedReader.readLine()) != null) {
+
+                // skip empty lines
+                if (line.isBlank()){
+                    continue;
+                }
                 lineNumber++;
 
                 // split and check transaction parts
@@ -40,10 +42,31 @@ public class TransactionsFileHandler {
 
             }
 
+        } catch (FileNotFoundException e) {
+            System.out.println("!!! File not found !!!");
+
         } catch (IOException e) {
             System.out.println("!!! Error reading file !!!");
         }
 
+    }
+
+    // write transaction Objects to file
+    public static boolean writeTransaction(Transaction transaction, String fileName) {
+
+        // prepare file for writing in append mode
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
+
+            // write the object and append new line
+            bufferedWriter.write(transaction.toFileString());
+            bufferedWriter.newLine();
+
+            return true;
+
+        } catch (IOException e) {
+            System.out.println("!!! Error writing to file !!!");
+            return false;
+        }
     }
 
     // parse transactionParts array and return transaction
