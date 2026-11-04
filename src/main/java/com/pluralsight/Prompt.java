@@ -44,6 +44,7 @@ public class Prompt {
                 3) Year To Date
                 4) Previous Year
                 5) Search by Vendor
+                6) Custom Search
                 0) Back - Go Back To The Ledger Page
                 """);
         return handleUserInput();
