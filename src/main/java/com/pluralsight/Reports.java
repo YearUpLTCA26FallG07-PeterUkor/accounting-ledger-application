@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.YearMonth;
 import java.util.ArrayList;
 
@@ -32,12 +33,52 @@ public class Reports {
     public static void monthToDate(ArrayList<Transaction> transactions) {
         // build YearMonth object
         YearMonth yearMonth = YearMonth.now();
+        findMatchingMonth(transactions, yearMonth);
+    }
+
+    // show transactions from last calendar month
+    public static void previousMonth(ArrayList<Transaction> transactions) {
+
+        // create a month object
+        YearMonth previousMonth = YearMonth.now().minusMonths(1);
+        findMatchingMonth(transactions, previousMonth);
+    }
+
+    public static void yearToDate(ArrayList<Transaction> transactions) {
+        // create new year object
+        Year year = Year.now();
+        findMatchingYear(transactions, year);
+    }
+    public static void previousYear(ArrayList<Transaction> transactions) {
+        Year previousYear = Year.now().minusYears(1);
+        findMatchingYear(transactions, previousYear);
+    }
+
+    // show transactions matching a vendor name
+    public static void searchByVendor(ArrayList<Transaction> transactions) {
+        String vendor = Prompt.textPrompt("Vendor");
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            // search vendors
+            if (transaction.getVendor().toLowerCase().contains(vendor.toLowerCase())) {
+                found = true;
+                System.out.println(transaction);
+            }
+        }
+
+        if (!found) {
+            System.out.println("\nNo transactions found for vendor: " + vendor);
+        }
+    }
+
+    public static void findMatchingMonth(ArrayList<Transaction> transactions, YearMonth yearMonth) {
         boolean found = false;
 
         // compare YearMonth object
         for (Transaction transaction : transactions) {
-            LocalDate localDate = transaction.getDate();
-            YearMonth localYearMonth = YearMonth.from(localDate);
+            // get YearMonth from each transaction LocalDate
+            YearMonth localYearMonth = YearMonth.from(transaction.getDate());
 
             if (localYearMonth.equals(yearMonth)) {
                 found = true;
@@ -49,9 +90,21 @@ public class Reports {
             System.out.println("\nNo transactions found");
         }
     }
+    public static void findMatchingYear(ArrayList<Transaction> transactions,  Year year) {
+        // compare year object
+        boolean found = false;
+        for (Transaction transaction : transactions) {
+            // get Year from each transaction LocalDate
+            Year localYear = Year.from(transaction.getDate());
 
-    public static void previousMonth(ArrayList<Transaction> transactions) { }
-    public static void yearToDate(ArrayList<Transaction> transactions) { }
-    public static void previousYear(ArrayList<Transaction> transactions) { }
-    public static void searchByVendor(ArrayList<Transaction> transactions) { }
+            if (localYear.equals(year)) {
+                found = true;
+                System.out.println(transaction);
+            }
+        }
+
+        if (!found) {
+            System.out.println("\nNo transactions found");
+        }
+    }
 }
