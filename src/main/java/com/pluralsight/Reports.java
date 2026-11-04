@@ -19,6 +19,7 @@ public class Reports {
                 case '3' -> yearToDate(transactions);
                 case '4' -> previousYear(transactions);
                 case '5' -> searchByVendor(transactions);
+                case '6' -> CustomSearch.search(transactions);
                 case '0' -> {
                     inLoop = false;
                     System.out.println("Returning to Ledger Screen...");
