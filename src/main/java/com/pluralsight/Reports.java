@@ -25,7 +25,7 @@ public class Reports {
                     System.out.println("Returning to Ledger Screen...");
                 }
                 default -> System.out.println("\nInvalid Input" +
-                        "\nValid Inputs Include: 1, 2, 3, 4, 5, or 0" +
+                        "\nValid Inputs Include: 1, 2, 3, 4, 5, 6, or 0" +
                         "\nPlease Enter a Valid Input");
             }
         } while (inLoop);
