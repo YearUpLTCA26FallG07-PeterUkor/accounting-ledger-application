@@ -74,12 +74,15 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "\nTransaction Type: " + transactionType + "\n" +
-                "Date: " + date.format(dateFormatter) + "\n" +
-                "Time: " + time.format(timeFormatter) + "\n" +
-                "Description: " + description + "\n" +
-                "Vendor: " + vendor + "\n" +
-                "Amount: " + String.format("%.2f", amount) + "\n";
+        return String.format("%-10s  %-8s  %-30.30s  %-20.20s  %10.2f  %-6s",
+                date.format(dateFormatter), time.format(timeFormatter),
+                description, vendor, amount, transactionType);
+    }
+
+    // column titles matching toString
+    public static String tableHeader() {
+        return String.format("%-10s  %-8s  %-30s  %-20s  %10s  %-6s",
+                "Date", "Time", "Description", "Vendor", "Amount", "Type");
     }
 
     public String toFileString() {

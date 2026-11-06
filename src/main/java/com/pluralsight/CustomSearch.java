@@ -27,6 +27,10 @@ public class CustomSearch {
         boolean found = false;
         for (Transaction transaction : transactions) {
             if (matches(transaction, startDate, endDate, description, vendor, amount)) {
+                // print the column titles above the first match
+                if (!found) {
+                    System.out.println("\n" + Transaction.tableHeader());
+                }
                 found = true;
                 System.out.println(transaction);
             }

@@ -11,8 +11,9 @@ public class Ledger {
             return;
         }
 
+        System.out.println("\n" + Transaction.tableHeader());
         for (Transaction transaction : transactions) {
-            System.out.print(transaction.toString());
+            System.out.println(transaction);
         }
     }
 
@@ -32,6 +33,10 @@ public class Ledger {
         // display transactionType matches
         for (Transaction transaction : transactions) {
             if (transaction.getTransactionType().equalsIgnoreCase(transactionType)) {
+                // print the column titles above the first match
+                if (!found) {
+                    System.out.println("\n" + Transaction.tableHeader());
+                }
                 found = true;
                 System.out.println(transaction);
             }

@@ -41,6 +41,10 @@ public class Reports {
         for (Transaction transaction : transactions) {
             // search vendors
             if (transaction.getVendor().toLowerCase().contains(vendor.toLowerCase())) {
+                // print the column titles above the first match
+                if (!found) {
+                    System.out.println("\n" + Transaction.tableHeader());
+                }
                 found = true;
                 System.out.println(transaction);
             }
@@ -61,6 +65,10 @@ public class Reports {
             YearMonth localYearMonth = YearMonth.from(transaction.getDate());
 
             if (localYearMonth.equals(yearMonth)) {
+                // print the column titles above the first match
+                if (!found) {
+                    System.out.println("\n" + Transaction.tableHeader());
+                }
                 found = true;
                 System.out.println(transaction);
             }
@@ -80,6 +88,10 @@ public class Reports {
             Year localYear = Year.from(transaction.getDate());
 
             if (localYear.equals(year)) {
+                // print the column titles above the first match
+                if (!found) {
+                    System.out.println("\n" + Transaction.tableHeader());
+                }
                 found = true;
                 System.out.println(transaction);
             }
