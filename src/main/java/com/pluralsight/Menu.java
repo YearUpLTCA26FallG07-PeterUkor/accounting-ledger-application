@@ -1,29 +1,61 @@
 package com.pluralsight;
 
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Prompt {
+public class Menu {
 
     static Scanner input = new Scanner(System.in);
 
     // home screen menu display
-    public static char displayHomeScreen(double balance) {
-        displayBalance(balance);
-        System.out.println("""
+    public static void displayHomeScreen(ArrayList<Transaction> transactions, String fileName) {
+        double balance = 0;
+        boolean inLoop = true;
+        do{
+            // calculate and display balance
+            balance = getBalance(transactions);
+            displayBalance(balance);
+
+            // display home screen and handle user input
+            System.out.println("""
                     === HOME SCREEN ===
                     D) Add Deposit - Enter Deposit Information
                     P) Make Payment(Debit) - Enter Debit Information
                     L) Ledger - Display Ledger Screen
                     X) Exit - Exit Application
                     """);
-        return handleUserInput();
+
+            // accept and handle user input
+            char choice =  handleUserInput();
+            switch (choice){
+                case 'D' -> Main.addDeposit(transactions, fileName);
+                case 'P' -> Main.makePayment(transactions, fileName);
+                case 'L' -> displayLedgerMenu(transactions, balance);
+                case 'X' -> {
+                    inLoop = false;
+                    System.out.println("Thank you.");
+                    System.out.println("Exiting Application...");
+                }
+
+                // handle other inputs
+                default -> System.out.println("\nInvalid Input" +
+                        "\nValid Inputs Include: D, P, L, or X" +
+                        "\nPlease Enter a Valid Input");
+            }
+        } while (inLoop);
     }
 
     // ledger screen menu display
-    public static char displayLedgerMenu(double balance) {
-        displayBalance(balance);
-        System.out.println("""
+    public static void displayLedgerMenu(ArrayList<Transaction> transactions, double balance) {
+
+        boolean inLoop = true;
+        do {
+            // display balance
+            displayBalance(balance);
+
+            // display ledger screen and handle user input
+            System.out.println("""
                 === LEDGER ===
                 A) All - Display All Entries
                 D) Deposits - Display Only Deposits
@@ -31,13 +63,37 @@ public class Prompt {
                 R) Reports - Run Pre-Defined Reports
                 H) Home - Go Back To Home Page
                 """);
-        return handleUserInput();
+
+            // accept and handle user input
+            char choice = handleUserInput();
+
+            switch (choice) {
+                case 'A' -> Ledger.displayTransactions(transactions);
+                case 'D' -> Ledger.displayDeposits(transactions);
+                case 'P' -> Ledger.displayPayments(transactions);
+                case 'R' -> displayReportsMenu(transactions, balance);
+                case 'H' -> {
+                    inLoop = false;
+                    System.out.println("Returning to Home Screen...");
+                }
+                default -> System.out.println("\nInvalid Input" +
+                        "\nValid Inputs Include: A, D, P, R, or H" +
+                        "\nPlease Enter a Valid Input");
+            }
+        } while (inLoop);
     }
 
     // reports screen menu display
-    public static char displayReportsMenu(double balance) {
-        displayBalance(balance);
-        System.out.println("""
+    public static void displayReportsMenu(ArrayList<Transaction> transactions,double balance) {
+
+
+        boolean inLoop = true;
+        do {
+            // display balance
+            displayBalance(balance);
+
+            // display ledger screen and handle user input
+            System.out.println("""
                 === REPORTS ===
                 1) Month To Date
                 2) Previous Month
@@ -47,7 +103,26 @@ public class Prompt {
                 6) Custom Search
                 0) Back - Go Back To The Ledger Page
                 """);
-        return handleUserInput();
+
+            // accept and handle user input
+            char choice = handleUserInput();
+
+            switch (choice) {
+                case '1' -> Reports.monthToDate(transactions);
+                case '2' -> Reports.previousMonth(transactions);
+                case '3' -> Reports.yearToDate(transactions);
+                case '4' -> Reports.previousYear(transactions);
+                case '5' -> Reports.searchByVendor(transactions);
+                case '6' -> CustomSearch.search(transactions);
+                case '0' -> {
+                    inLoop = false;
+                    System.out.println("Returning to Ledger Screen...");
+                }
+                default -> System.out.println("\nInvalid Input" +
+                        "\nValid Inputs Include: 1, 2, 3, 4, 5, 6, or 0" +
+                        "\nPlease Enter a Valid Input");
+            }
+        } while (inLoop);
     }
 
     public static void displayBalance(double balance) {
@@ -104,6 +179,9 @@ public class Prompt {
                 continue;
             }
 
+            // round to cents so the amount matches what is saved to the file
+            transactionAmount = Math.round(transactionAmount * 100) / 100.0;
+
             // check for transaction type against amount
             // credits cannot be negative and debits cannot be positive
             if (transactionType.equalsIgnoreCase("Credit") && (transactionAmount <= 0)){
@@ -149,5 +227,13 @@ public class Prompt {
         return userInput.equalsIgnoreCase("y");
     }
 
+    // sum all transaction amounts
+    public static double getBalance(ArrayList<Transaction> transactions) {
+        double balance = 0;
+        for (Transaction transaction : transactions) {
+            balance += transaction.getAmount();
+        }
+        return balance;
+    }
 
 }

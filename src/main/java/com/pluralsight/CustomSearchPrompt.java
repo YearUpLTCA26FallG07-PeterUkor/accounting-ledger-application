@@ -9,7 +9,7 @@ public class CustomSearchPrompt {
     public static String optionalTextPrompt(String label) {
         do {
             System.out.print(label + " (leave blank to skip): ");
-            String userInput = Prompt.input.nextLine().trim();
+            String userInput = Menu.input.nextLine().trim();
 
             // blank input means skip this filter
             if (userInput.isEmpty()) {
@@ -28,7 +28,7 @@ public class CustomSearchPrompt {
     public static LocalDate optionalDatePrompt(String label) {
         do {
             System.out.print(label + " (yyyy-MM-dd, leave blank to skip): ");
-            String userInput = Prompt.input.nextLine().trim();
+            String userInput = Menu.input.nextLine().trim();
 
             // blank input means skip this filter
             if (userInput.isEmpty()) {
@@ -48,7 +48,7 @@ public class CustomSearchPrompt {
     public static Double optionalAmountPrompt(String label) {
         do {
             System.out.print(label + " (leave blank to skip): ");
-            String userInput = Prompt.input.nextLine().trim();
+            String userInput = Menu.input.nextLine().trim();
 
             // blank input means skip this filter
             if (userInput.isEmpty()) {

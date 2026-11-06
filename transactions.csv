@@ -1,23 +1,61 @@
 date|time|description|vendor|amount
-2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
-2023-04-16|09:30:15|Office supplies|Staples|-125.75
-2023-04-17|14:20:40|Client payment|Acme Corp|2750.00
-2023-04-18|08:45:10|Coffee for office|Starbucks|-32.50
-2023-04-19|16:10:25|Website maintenance|Web Solutions|-199.99
-2023-04-20|11:05:35|Consulting income|TechStart LLC|1800.00
-2023-04-21|13:40:50|Printer ink|Office Depot|-78.25
-2023-04-22|10:15:20|Internet bill|Verizon|-89.99
-2023-04-23|15:55:45|Invoice 1002 paid|Global Media|3200.00
-2023-04-24|09:10:30|Business lunch|Chipotle|-45.80
-2023-04-25|12:25:15|Software subscription|Adobe|-54.99
-2023-04-26|14:35:40|Freelance project payment|John Smith|950.00
-2023-04-27|08:20:55|Office electricity|PSEG|-175.40
-2023-04-28|17:05:10|Domain renewal|GoDaddy|-24.99
-2023-04-29|11:45:25|Invoice 1003 paid|Acme Corp|2100.00
-2023-04-30|13:15:50|Employee payroll|Payroll Services|-1250.00
-2023-05-01|09:25:35|Monthly office rent|Property Management|-1200.00
-2023-05-02|16:30:20|Client deposit|Bright Future LLC|750.00
-2023-05-03|10:50:45|Cloud hosting|AWS|-68.75
-2023-05-04|14:15:30|Equipment reimbursement|Acme Corp|225.50
-2023-05-05|11:40:15|Travel expenses|Uber|-42.60
+2025-08-14|10:35:45|Client invoice paid|Global Media|4200.00
+2022-03-08|14:20:10|Printer purchase|Staples|-249.99
+2026-04-16|15:30:45|Consulting payment|TechStart LLC|3100.00
+2023-11-29|15:10:50|Consulting payment|John Smith|1200.00
+2024-02-08|13:25:40|Client contract payment|Acme Corp|4100.00
+2022-10-31|12:25:45|Software subscription|Adobe|-54.99
+2026-07-13|10:35:50|Office supplies|Amazon|abc
+2025-01-16|11:55:15|Office rent|Property Management|-1300.00
+2023-04-15|10:13:25|Ergonomic keyboard|Amazon|-89.50
+2024-12-24|10:10:30|Year end bonus|Global Media|800.00
+2022-06-03|08:30:15|Project deposit|Global Media|3200.00
+2026-02-20|13:40:50|Client payment|Global Media|2850.00
+2025-09-03|13:20:10|Cloud storage|AWS|-115.75
+2023-02-21|11:45:50|Website development|Web Solutions|1750.00
+2024-08-21|12:05:45|Consulting income|TechStart LLC|2400.00
+2022-01-05|09:15:20|Office rent|Property Management|-1200.00
+2026-08-25|25:15:00|Internet bill|Verizon|-89.99
+2025-04-18|16:15:10|Project payment|Acme Corp|3600.00
+2023-07-09|12:30:00|Equipment reimbursement|Acme Corp|225.50
+2024-03-19|09:45:10|Marketing expenses|Google Ads|-325.50
+2022-12-27|14:35:10|Holiday bonus|Acme Corp|500.00
+2026-05-21|11:05:10|Laptop accessories|Amazon|-185.25
+2023-12-11|08:55:35|Employee payroll|Payroll Services|-1450.00
+2025-06-11|08:25:50|Consulting income|TechStart LLC|1950.00
+2024-10-12|09:20:05|Client deposit|Acme Corp|1500.00
+2022-08-25|15:55:20|Freelance income|John Smith|950.00
+2026-09-31|12:45:30|Office supplies|Staples|-125.50
+2023-05-06|13:50:40|Client payment|Global Media|2900.00
+2024-05-27|11:15:50|Computer monitor|Best Buy|-299.99
+2025-12-08|14:55:15|Annual contract payment|Acme Corp|5000.00
+2022-04-22|10:05:35|Consulting income|TechStart LLC|1800.00
+2026-01-12|10:25:35|January office rent|Property Management|-1350.00
+2023-09-05|14:20:10|Invoice 1005 paid|TechStart LLC|1850.00
+2024-07-06|08:40:15|Office coffee|Starbucks|-38.75
+2025-03-09|09:05:25|Software license|Microsoft|-149.99
+2022-11-18|10:15:00|Invoice 1004 paid|Bright Future LLC|2100.00
+2026-10-04|11:20:15|Cloud hosting|AWS|
+2023-01-10|08:20:35|Cloud hosting|AWS|-68.75
+2024-11-07|13:45:50|Business travel|Delta Airlines|-450.25
+2025-10-26|09:45:30|Freelance project|John Smith|1450.00
+2022-07-19|13:10:50|Office supplies|Amazon|-145.75
+2026-06-09|14:20:35|Invoice 1008 paid|Bright Future LLC|2250.00
+2023-06-14|16:05:15|Travel expenses|Uber|-42.60
+2024-01-22|10:35:15|Monthly office rent|Property Management|-1250.00
+2025-07-29|15:50:20|Internet bill|Verizon|-95.00
+2022-09-12|09:40:30|Electricity bill|PSEG|-175.40
+2026-10-15|09:30:40|Client payment||250.00
+2023-10-17|11:40:25|Domain renewal|GoDaddy|-24.99
+2024-04-04|16:20:25|Freelance income|Bright Future LLC|1750.00
+2025-02-28|14:30:40|Invoice 1007 paid|Bright Future LLC|2750.00
+2022-02-14|11:30:45|Client payment|Acme Corp|2500.00
+2026-03-07|09:15:20|Internet subscription|Verizon|-99.99
+2023-08-23|09:15:45|Office furniture|IKEA|-499.99
+2024-06-13|14:50:30|Invoice 1006 paid|Global Media|3200.00
+2025-11-19|11:10:55|Office equipment|Amazon|-375.50
+2022-05-17|16:45:00|Internet bill|Verizon|-89.99
+2026-10-20|13:10:25|Office equipment|Amazon|-75.00|Payment
+2023-03-15|09:30:25|Business lunch|Chipotle|-45.80
+2024-09-30|15:35:20|Security software|Norton|-89.99
+2025-05-23|12:40:35|Office stationery|Staples|-67.50

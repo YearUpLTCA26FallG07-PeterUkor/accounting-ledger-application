@@ -68,7 +68,7 @@ public class CustomSearch {
         return true;
     }
 
-    // check if text contains search, ignoring case
+    // search whether one text matches another text
     private static boolean containsIgnoreCase(String text, String search) {
         return text.toLowerCase().contains(search.toLowerCase());
     }

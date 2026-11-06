@@ -19,28 +19,10 @@ public class Main {
                 .thenComparing(Transaction::getTime)
                 .reversed());
 
-        boolean inLoop = true;
-        do{
-            // display home screen and handle user input
-            char choice = Prompt.displayHomeScreen(Ledger.getBalance(transactions));
+        // display the home screen menu and handle user inputs
+        // call add deposit and make payments methods
+        Menu.displayHomeScreen(transactions, fileName);
 
-            // handle matches
-            switch (choice){
-                case 'D' -> addDeposit(transactions, fileName);
-                case 'P' -> makePayment(transactions, fileName);
-                case 'L' -> Ledger.ledgerScreen(transactions);
-                case 'X' -> {
-                    inLoop = false;
-                    System.out.println("Thank you.");
-                    System.out.println("Exiting Application...");
-                }
-
-                // handle other inputs
-                default -> System.out.println("\nInvalid Input" +
-                        "\nValid Inputs Include: D, P, L, or X" +
-                        "\nPlease Enter a Valid Input");
-            }
-        } while (inLoop);
     }
 
     // handle deposits
@@ -61,7 +43,7 @@ public class Main {
         do {
 
             // prompt user for input and create transaction Object
-            Transaction transaction = Prompt.transactionPrompt(transactionType);
+            Transaction transaction = Menu.transactionPrompt(transactionType);
 
             // save transaction to file, then add object to the list
             if (TransactionsFileHandler.writeTransaction(transaction, filename)) {
@@ -70,7 +52,7 @@ public class Main {
             }
 
             // prompt for add another transaction
-        } while (Prompt.addAnotherTransaction());
+        } while (Menu.addAnotherTransaction());
     }
 
 }

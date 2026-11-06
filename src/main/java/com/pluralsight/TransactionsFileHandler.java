@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class TransactionsFileHandler {
 
+    // load file into array list object
     public static void loadFile(ArrayList<Transaction> transactions, String fileName) {
 
         // create file reader and buffer reader and prepare file for reading
@@ -72,7 +73,7 @@ public class TransactionsFileHandler {
         }
     }
 
-    // parse transactionParts array and return transaction
+    // parse file entries and return transaction
     private static Transaction getTransaction(String[] transactionParts, int lineNumber) {
 
         LocalDate localDate;
@@ -89,6 +90,13 @@ public class TransactionsFileHandler {
         } catch (DateTimeException e){
             invalidTransactionEntry(transactionParts, lineNumber);
             System.out.println("Invalid DateTime Entry");
+            return null;
+        }
+
+        // reject empty description or vendor
+        if (transactionDescription.isBlank() || vendor.isBlank()) {
+            invalidTransactionEntry(transactionParts, lineNumber);
+            System.out.println("Description and vendor cannot be empty");
             return null;
         }
 
@@ -117,6 +125,7 @@ public class TransactionsFileHandler {
                 vendor, transactionAmount, transactionType);
     }
 
+    // print invalid transaction error messages
     private static void invalidTransactionEntry(String[] transactionParts, int lineNumber) {
         System.out.println("\n - Invalid Transaction Entry: " +
                 lineNumber + ") " +
